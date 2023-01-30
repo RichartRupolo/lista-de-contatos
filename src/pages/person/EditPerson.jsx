@@ -1,15 +1,15 @@
-class EditContact extends React.Component {
+class Editperson extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      contact: props.contact
+      person: props.person
     };
   }
 
   handleChange(event) {
     this.setState({
-      contact: {
-        ...this.state.contact,
+      person: {
+        ...this.state.person,
         [event.target.name]: event.target.value
       }
     });
@@ -17,9 +17,9 @@ class EditContact extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    fetch('/api/contacts', {
+    fetch(`localhost:8091/api/person/${this.state.person.id}`, {
       method: 'PUT',
-      body: JSON.stringify(this.state.contact),
+      body: JSON.stringify(this.state.person),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -39,13 +39,13 @@ class EditContact extends React.Component {
         <input
           type="text"
           name="name"
-          value={this.state.contact.name}
+          value={this.state.person.name}
           onChange={this.handleChange.bind(this)}
         />
         <input
           type="text"
           name="email"
-          value={this.state.contact.email}
+          value={this.state.person.email}
           onChange={this.handleChange.bind(this)}
         />
         <button type="submit">Save</button>
